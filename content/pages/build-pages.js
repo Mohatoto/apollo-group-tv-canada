@@ -9,6 +9,8 @@ const CSS=fs.readFileSync(R+'assets/index-v4.css','utf8');
 const pages=JSON.parse(fs.readFileSync(path.join(__dirname,'pages.json'))),faq=JSON.parse(fs.readFileSync(path.join(__dirname,'faq.json')));
 const esc=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 const un=s=>JSON.parse('"'+s+'"');
+// Google Analytics 4 (inline, loads gtag.js after the page has loaded).
+const GA = '<script>(function(){var id="G-QBG708E9DH";window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",id);function l(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s)}if(document.readyState==="complete")setTimeout(l,0);else addEventListener("load",function(){setTimeout(l,0)})})()</script>';
 const ld=o=>'<script type="application/ld+json">'+JSON.stringify(o).replace(/</g,'\\u003c')+'</script>';
 const org={"@type":"Organization","@id":O+"#organization","name":"Apollo Group TV Canada","url":O,"logo":{"@type":"ImageObject","url":O+"logo-512.png","width":512,"height":512},"areaServed":{"@type":"Country","name":"Canada"}};
 const site={"@type":"WebSite","@id":O+"#website","url":O,"name":"Apollo Group TV Canada","inLanguage":"en-CA","publisher":{"@id":O+"#organization"}};
@@ -53,6 +55,7 @@ ${r===''?'    <link rel="preload" as="image" href="/assets/hero-bg2-828.webp" ty
     <script type="module" crossorigin src="/assets/index-v5.js"></script>
     <style>${CSS}</style>
     ${ld(graph(r,p))}
+    ${GA}
   </head>
   <body>
     <div id="root">${body}</div>

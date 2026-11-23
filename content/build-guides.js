@@ -7,6 +7,8 @@ const ROOT = path.resolve(__dirname, '..'), SRC = path.join(__dirname, 'guides')
 const UPDATED = process.env.GUIDES_DATE || new Date().toISOString().slice(0, 10);
 const ORDER = ['what-is-iptv', 'choosing-a-plan', 'ordering-and-interac-payment', 'five-devices-one-account', 'internet-speed-for-streaming', 'wifi-vs-ethernet', 'fix-buffering', 'streaming-data-usage', 'streaming-while-travelling', 'cutting-cable-checklist'];
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+// Google Analytics 4 (inline, loads gtag.js after the page has loaded).
+const GA = '<script>(function(){var id="G-QBG708E9DH";window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",id);function l(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s)}if(document.readyState==="complete")setTimeout(l,0);else addEventListener("load",function(){setTimeout(l,0)})})()</script>';
 const ld = o => '<script type="application/ld+json">' + JSON.stringify(o).replace(/</g, '\\u003c') + '</script>';
 const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const fontHead = '    ' + home.match(/<style>@font-face[\s\S]*?<\/style>\n/)[0].replace(/@media \(max-width:640px\)\{#home[^}]*\}\}/, '');
@@ -80,6 +82,7 @@ function page({ url, title, desc, type, graph, body }) {
 ${fontHead}    <link rel="stylesheet" href="${cssHref}">
     ${STYLE}
     ${ld({ '@context': 'https://schema.org', '@graph': graph })}
+    ${GA}
   </head>
   <body>
     <header class="g-top"><div class="g-wrap"><a class="g-brand" href="/"><img src="/favicon-48.png?v=2" alt="" width="28" height="28">Apollo Group TV Canada</a><nav class="g-nav" aria-label="Main">${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</nav></div></header>
