@@ -1,0 +1,28 @@
+# Apollo Group TV Canada
+
+> Apollo Group TV Canada (apollogrouptv.ca) is an IPTV streaming subscription sold to viewers in Canada. It offers live TV channels, sports, movies and series in HD and 4K on up to 5 devices per account, on prepaid plans with no long-term contract.
+
+## Plans and prices (CAD, as listed on the site on 2026-11-23)
+
+- Starter: $24.99 for 30 days
+- Growth: $51.99 for 90 days
+- Elite: $89.99 for 180 days
+- Professional: $159.99 for 365 days (about $13.35 per month)
+
+All plans include use on up to 5 devices per account, live channels and an on-demand library of movies and TV shows.
+
+## How ordering and payment work
+
+- Orders are placed by email or through the order form linked from the pricing section.
+- Payment is made by Interac e-Transfer. The website does not process card payments.
+- Login details are sent after payment is confirmed.
+
+## Pages
+
+- [Home and pricing](https://www.apollogrouptv.ca/): service overview, plans and prices
+- [About](https://www.apollogrouptv.ca/about-us/): who the service is for and what it includes
+- [FAQ](https://www.apollogrouptv.ca/faq/): devices, internet speed, plans, payment and setup
+- [Contact](https://www.apollogrouptv.ca/contact/): how to reach support
+- [Refund Policy](https://www.apollogrouptv.ca/refund-policy/)
+- [Privacy Policy](https://www.apollogrouptv.ca/privacy-policy/)
+- [Terms and Conditions](https://www.apollogrouptv.ca/terms-and-conditions/)
