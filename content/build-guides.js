@@ -62,9 +62,9 @@ function page({ url, title, desc, type, graph, body }) {
     <meta name="description" content="${esc(desc)}" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="${url}" />
-    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
-    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon-48.png?v=2" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon-192.png?v=2" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <meta name="theme-color" content="#080a0c" />
     <meta property="og:title" content="${esc(title)}" />
     <meta property="og:description" content="${esc(desc)}" />
@@ -82,7 +82,7 @@ ${fontHead}    <link rel="stylesheet" href="${cssHref}">
     ${ld({ '@context': 'https://schema.org', '@graph': graph })}
   </head>
   <body>
-    <header class="g-top"><div class="g-wrap"><a class="g-brand" href="/"><img src="/favicon-48.png" alt="" width="28" height="28">Apollo Group TV Canada</a><nav class="g-nav" aria-label="Main">${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</nav></div></header>
+    <header class="g-top"><div class="g-wrap"><a class="g-brand" href="/"><img src="/favicon-48.png?v=2" alt="" width="28" height="28">Apollo Group TV Canada</a><nav class="g-nav" aria-label="Main">${NAV.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</nav></div></header>
     <main class="g-wrap g-art">${body}</main>
     <footer class="g-foot"><div class="g-wrap"><nav aria-label="Footer">${FOOT.map(([h, t]) => `<a href="${h}">${t}</a>`).join('')}</nav><p>Apollo Group TV Canada. Questions? Write to <a href="mailto:support@apollogrouptv.ca">support@apollogrouptv.ca</a>.</p></div></footer>
   </body>
