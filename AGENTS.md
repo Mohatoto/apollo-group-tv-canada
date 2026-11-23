@@ -43,6 +43,7 @@ Search Console: account `apollogrouptvca@gmail.com` (`/u/6/` in the owner's Chro
 
 ## Google Analytics 4 (installed 2026-11-23)
 
+- Search Console is linked to this GA4 property (2026-11-23, by taoifikagouieze122@gmail.com, who is now a Search Console owner too). Reports > Search Console > Queries / Google organic search traffic show queries next to engagement and key events per landing page: use them in the weekly read. Do not unlink.
 - Property `apollogrouptv.ca`, Measurement ID `G-QBG708E9DH`, GA account 291373829, Google account taoifikagouieze122@gmail.com (the one used for the owner's Search Console; this site's Search Console is on apollogrouptvca@gmail.com, GA4 is not).
 - Where it lives: an inline snippet before `</head>` in every published HTML page, and the `GA` constant in `content/build-guides.js` and `content/pages/build-pages.js` so rebuilt pages keep it. It is inline on purpose: guides must not load a script file (regression suite).
 - Conversions to read: page views of `/thank-you/` (one view = one order form sent). No custom events; do not touch the order links or the thank-you page.
