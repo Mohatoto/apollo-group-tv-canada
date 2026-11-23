@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Fix Buffering and Freezing When Streaming</title>
+    <meta name="description" content="A step-by-step checklist for buffering, freezing and low picture quality, starting with the fixes that solve most problems." />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.apollogrouptv.ca/guides/fix-buffering/" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#080a0c" />
+    <meta property="og:title" content="How to Fix Buffering and Freezing When Streaming" />
+    <meta property="og:description" content="A step-by-step checklist for buffering, freezing and low picture quality, starting with the fixes that solve most problems." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.apollogrouptv.ca/guides/fix-buffering/" />
+    <meta property="og:image" content="https://www.apollogrouptv.ca/og-image.jpg" />
+    <meta property="og:site_name" content="Apollo Group TV Canada" />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How to Fix Buffering and Freezing When Streaming" />
+    <meta name="twitter:description" content="A step-by-step checklist for buffering, freezing and low picture quality, starting with the fixes that solve most problems." />
+    <meta name="twitter:image" content="https://www.apollogrouptv.ca/og-image.jpg" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/montserrat-latin-wght-normal.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin-wght-normal.woff2" crossorigin>
+    <style>@font-face{font-family:Montserrat;font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-normal.woff2) format("woff2")}@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-latin-wght-normal.woff2) format("woff2")}@font-face{font-family:"Montserrat Fallback";src:local("Arial"),local("Liberation Sans"),local("Helvetica");size-adjust:113%;ascent-override:85.8%;descent-override:22.2%;line-gap-override:0%}@font-face{font-family:"Inter Fallback";src:local("Arial"),local("Liberation Sans"),local("Helvetica");size-adjust:108%;ascent-override:89.7%;descent-override:22.3%;line-gap-override:0%}</style>
+    <link rel="stylesheet" href="/assets/index-v4.css">
+    <style>
+.g-wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+.g-top{border-bottom:1px solid hsl(var(--border));background:hsl(var(--background))}
+.g-top .g-wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem;max-width:64rem;flex-wrap:wrap;padding-top:.5rem;padding-bottom:.5rem}
+.g-brand{display:flex;align-items:center;gap:.6rem;font-family:Montserrat,"Montserrat Fallback",sans-serif;font-weight:700;color:hsl(var(--foreground));text-decoration:none}
+.g-nav{display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.95rem}
+.g-nav a,.g-foot a{color:hsl(var(--muted-foreground));text-decoration:underline;text-underline-offset:3px;padding:.5rem 0;display:inline-block}
+.g-nav a:hover,.g-foot a:hover{color:hsl(var(--primary))}
+.g-crumb{font-size:.875rem;color:hsl(var(--muted-foreground));margin:2rem 0 1rem}
+.g-crumb a{color:hsl(var(--primary));text-decoration:underline;text-underline-offset:3px}
+.g-art h1{font-family:Montserrat,"Montserrat Fallback",sans-serif;font-weight:800;font-size:clamp(1.9rem,5vw,2.75rem);line-height:1.15;color:hsl(var(--foreground));margin:0 0 .75rem}
+.g-meta{color:hsl(var(--muted-foreground));font-size:.9rem;margin-bottom:2rem}
+.g-art h2{font-family:Montserrat,"Montserrat Fallback",sans-serif;font-weight:700;font-size:1.5rem;line-height:1.25;color:hsl(var(--foreground));margin:2.5rem 0 .9rem}
+.g-art h3{font-weight:600;font-size:1.125rem;color:hsl(var(--foreground));margin:1.75rem 0 .5rem}
+.g-art p,.g-art li{color:hsl(0 0% 82%);line-height:1.75;font-size:1.0625rem}
+.g-art p{margin:0 0 1.1rem}
+.g-art .g-lead{font-size:1.2rem;color:hsl(var(--foreground))}
+.g-art ul,.g-art ol{margin:0 0 1.25rem;padding-left:1.4rem}
+.g-art ul{list-style:disc}.g-art ol{list-style:decimal}
+.g-art li{margin-bottom:.45rem}
+.g-art strong{color:hsl(var(--foreground));font-weight:600}
+.g-art a{color:hsl(var(--primary));text-decoration:underline;text-underline-offset:3px}
+.g-tablewrap{overflow-x:auto;margin:0 0 1.5rem;border:1px solid hsl(var(--border));border-radius:.75rem}
+.g-art table{width:100%;border-collapse:collapse;font-size:.975rem;min-width:28rem}
+.g-art th,.g-art td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid hsl(var(--border));color:hsl(0 0% 85%);vertical-align:top}
+.g-art th{background:hsl(var(--secondary));color:hsl(var(--foreground));font-weight:600}
+.g-art tr:last-child td{border-bottom:0}
+.g-cta{margin:3rem 0;padding:1.5rem;border:1px solid hsl(var(--border));border-radius:.9rem;background:hsl(var(--card))}
+.g-cta p{margin:0 0 1rem}
+.g-btn{display:inline-block;background:hsl(var(--primary));color:hsl(var(--primary-foreground))!important;font-weight:700;padding:.85rem 1.5rem;border-radius:.6rem;text-decoration:none!important}
+.g-list{list-style:none!important;padding:0!important;display:grid;gap:1rem}
+.g-list li{border:1px solid hsl(var(--border));border-radius:.9rem;background:hsl(var(--card));padding:1.1rem 1.25rem;margin:0}
+.g-list a{font-weight:600;font-size:1.125rem}
+.g-list p{margin:.35rem 0 0;font-size:.975rem;color:hsl(var(--muted-foreground))}
+.g-foot{border-top:1px solid hsl(var(--border));margin-top:4rem;padding:2rem 0 3rem;font-size:.9rem;color:hsl(var(--muted-foreground))}
+.g-foot nav{display:flex;flex-wrap:wrap;gap:.25rem 1.25rem;margin-bottom:1rem}
+</style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.apollogrouptv.ca/#organization","name":"Apollo Group TV Canada","url":"https://www.apollogrouptv.ca/","logo":{"@type":"ImageObject","url":"https://www.apollogrouptv.ca/logo-512.png","width":512,"height":512}},{"@type":"WebSite","@id":"https://www.apollogrouptv.ca/#website","url":"https://www.apollogrouptv.ca/","name":"Apollo Group TV Canada","inLanguage":"en-CA","publisher":{"@id":"https://www.apollogrouptv.ca/#organization"}},{"@type":"Article","@id":"https://www.apollogrouptv.ca/guides/fix-buffering/#article","headline":"How to Fix Buffering and Freezing When Streaming","description":"A step-by-step checklist for buffering, freezing and low picture quality, starting with the fixes that solve most problems.","datePublished":"2026-11-23","dateModified":"2026-11-23","inLanguage":"en-CA","image":"https://www.apollogrouptv.ca/og-image.jpg","author":{"@id":"https://www.apollogrouptv.ca/#organization"},"publisher":{"@id":"https://www.apollogrouptv.ca/#organization"},"mainEntityOfPage":"https://www.apollogrouptv.ca/guides/fix-buffering/","isPartOf":{"@id":"https://www.apollogrouptv.ca/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.apollogrouptv.ca/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://www.apollogrouptv.ca/guides/"},{"@type":"ListItem","position":3,"name":"How to Fix Buffering and Freezing When Streaming","item":"https://www.apollogrouptv.ca/guides/fix-buffering/"}]},{"@type":"FAQPage","@id":"https://www.apollogrouptv.ca/guides/fix-buffering/#faq","mainEntity":[{"@type":"Question","name":"Why does live TV buffer more than movies?","acceptedAnswer":{"@type":"Answer","text":"A movie can load several minutes ahead. Live TV can only load a few seconds ahead, because the rest has not happened yet, so short dips in your connection show up sooner."}},{"@type":"Question","name":"Will a faster internet plan stop buffering?","acceptedAnswer":{"@type":"Answer","text":"Only if your speed is the cause. If the speed test near your TV is already above the listed figures, a faster plan will not help, and the fix is usually Wi-Fi or a cable connection."}},{"@type":"Question","name":"Does lowering the picture quality help?","acceptedAnswer":{"@type":"Answer","text":"Yes. If your app has a quality setting, choosing HD in place of 4K cuts the speed you need by more than half."}}]}]}</script>
+  </head>
+  <body>
+    <header class="g-top"><div class="g-wrap"><a class="g-brand" href="/"><img src="/favicon-48.png" alt="" width="28" height="28">Apollo Group TV Canada</a><nav class="g-nav" aria-label="Main"><a href="/">Home</a><a href="/#pricing">Plans</a><a href="/guides/">Guides</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a></nav></div></header>
+    <main class="g-wrap g-art"><p class="g-crumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › How to Fix Buffering and Freezing When Streaming</p>
+<article><h1>How to Fix Buffering and Freezing When Streaming</h1><p class="g-meta">By Apollo Group TV Canada · Last updated <time datetime="2026-11-23">November 23, 2026</time></p>
+<p class="g-lead">Most buffering comes from the connection between your router and your device, not from the service itself. Work through these steps in order, and test again after each one.</p>
+<h2>1. Restart the app and the device</h2>
+<p>Close the app completely and open it again. If that does not help, switch the device off, unplug it for 30 seconds and start it again. This clears temporary faults and is the fix that works most often.</p>
+<h2>2. Restart your modem and router</h2>
+<p>Unplug both for 30 seconds. Plug the modem in first, wait until its lights settle, then plug in the router. Give it two minutes before you test.</p>
+<h2>3. Test your speed where you watch</h2>
+<p>Run a speed test on the device you watch on, or on a phone held next to it. Apollo Group TV Canada lists 10 Mbps or more for HD and 25 Mbps or more for 4K, for each stream.</p>
+<ul>
+<li>If the speed is fine next to the router and poor near the TV, the cause is Wi-Fi signal. Go to step 4.</li>
+<li>If the speed is poor everywhere, the cause is your internet connection. Go to step 6.</li>
+</ul>
+<h2>4. Improve the Wi-Fi signal</h2>
+<ul>
+<li>Move the router into the open, off the floor and away from thick walls, microwaves and cordless phones.</li>
+<li>Use the 5 GHz network if your router offers one and the device is in the same room or the next one.</li>
+<li>Connect the TV or streaming box to the router with an Ethernet cable if you can. A cable removes Wi-Fi problems entirely.</li>
+</ul>
+<h2>5. Reduce what else is using the connection</h2>
+<p>Pause large downloads, cloud backups and game updates while you watch. Check how many screens are streaming at the same moment, since they all share one connection.</p>
+<h2>6. Check with your internet provider</h2>
+<p>If the speed at the router is well below what you pay for, contact your internet provider. Also ask whether your plan has a monthly data limit, because some providers slow the connection once you pass it.</p>
+<h2>7. Contact support</h2>
+<p>If your speed is good and only one channel or title freezes, the problem may be on the service side. Write to <a href="mailto:support@apollogrouptv.ca">support@apollogrouptv.ca</a> with the device you use, the channel or title, the time it happened and your speed test result. Those four details let support find the cause much faster.</p>
+<h2>Frequently asked questions</h2>
+<h3>Why does live TV buffer more than movies?</h3>
+<p>A movie can load several minutes ahead. Live TV can only load a few seconds ahead, because the rest has not happened yet, so short dips in your connection show up sooner.</p>
+<h3>Will a faster internet plan stop buffering?</h3>
+<p>Only if your speed is the cause. If the speed test near your TV is already above the listed figures, a faster plan will not help, and the fix is usually Wi-Fi or a cable connection.</p>
+<h3>Does lowering the picture quality help?</h3>
+<p>Yes. If your app has a quality setting, choosing HD in place of 4K cuts the speed you need by more than half.</p>
+
+<div class="g-cta"><p><strong>Ready to try it?</strong> Plans start at $24.99 for 30 days, with no contract and use on up to 5 devices.</p><a class="g-btn" href="/#pricing">View plans and pricing</a></div>
+<h2>More guides</h2><ul class="g-list"><li><a href="/guides/streaming-data-usage/">How Much Data Does Streaming TV Use?</a><p>Rough data use per hour for HD and 4K streaming, what that adds up to in a month, and how to stay inside a home internet data limit.</p></li><li><a href="/guides/streaming-while-travelling/">Streaming While Travelling: What to Expect</a><p>How to keep watching away from home, what to check on hotel Wi-Fi and mobile data, and how the device limit works on the road.</p></li><li><a href="/guides/cutting-cable-checklist/">Cutting Cable in Canada: What to Check First</a><p>A practical checklist for moving from cable TV to streaming in Canada, covering internet speed, data limits, devices, contracts and costs.</p></li></ul></article></main>
+    <footer class="g-foot"><div class="g-wrap"><nav aria-label="Footer"><a href="/about-us/">About</a><a href="/guides/">Guides</a><a href="/faq/">FAQ</a><a href="/contact/">Contact</a><a href="/privacy-policy/">Privacy Policy</a><a href="/refund-policy/">Refund Policy</a><a href="/terms-and-conditions/">Terms & Conditions</a></nav><p>Apollo Group TV Canada. Questions? Write to <a href="mailto:support@apollogrouptv.ca">support@apollogrouptv.ca</a>.</p></div></footer>
+  </body>
+</html>

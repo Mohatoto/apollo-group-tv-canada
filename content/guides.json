@@ -1,0 +1,52 @@
+[
+ {
+  "slug": "what-is-iptv",
+  "title": "What Is IPTV and How Does It Work?",
+  "desc": "IPTV delivers live TV and on-demand video over your internet connection instead of cable or satellite. Here is how it works and what you need to use it."
+ },
+ {
+  "slug": "choosing-a-plan",
+  "title": "Which Plan Length Should You Choose?",
+  "desc": "A side-by-side look at the 30, 90, 180 and 365-day Apollo Group TV Canada plans, with the cost per day of each and who each one suits."
+ },
+ {
+  "slug": "ordering-and-interac-payment",
+  "title": "How Ordering and Interac e-Transfer Payment Work",
+  "desc": "The steps from choosing a plan to receiving your login details, how to pay by Interac e-Transfer, and what to check before you send money."
+ },
+ {
+  "slug": "five-devices-one-account",
+  "title": "Using One Account on Up to 5 Devices",
+  "desc": "What the 5-device limit means, how much internet speed a household needs for several screens, and how to keep every stream smooth."
+ },
+ {
+  "slug": "internet-speed-for-streaming",
+  "title": "What Internet Speed Do You Need for HD and 4K?",
+  "desc": "How much internet speed you need to stream in HD and 4K, how to add it up for several screens, and how to test the speed you really get."
+ },
+ {
+  "slug": "wifi-vs-ethernet",
+  "title": "Wi-Fi or Ethernet for Streaming: Which Is Better?",
+  "desc": "When a network cable beats Wi-Fi for streaming, when Wi-Fi is fine, and how to get a steady picture with either one."
+ },
+ {
+  "slug": "fix-buffering",
+  "title": "How to Fix Buffering and Freezing When Streaming",
+  "desc": "A step-by-step checklist for buffering, freezing and low picture quality, starting with the fixes that solve most problems."
+ },
+ {
+  "slug": "streaming-data-usage",
+  "title": "How Much Data Does Streaming TV Use?",
+  "desc": "Rough data use per hour for HD and 4K streaming, what that adds up to in a month, and how to stay inside a home internet data limit."
+ },
+ {
+  "slug": "streaming-while-travelling",
+  "title": "Streaming While Travelling: What to Expect",
+  "desc": "How to keep watching away from home, what to check on hotel Wi-Fi and mobile data, and how the device limit works on the road."
+ },
+ {
+  "slug": "cutting-cable-checklist",
+  "title": "Cutting Cable in Canada: What to Check First",
+  "desc": "A practical checklist for moving from cable TV to streaming in Canada, covering internet speed, data limits, devices, contracts and costs."
+ }
+]

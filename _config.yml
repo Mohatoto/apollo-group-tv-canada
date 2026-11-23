@@ -3,3 +3,4 @@
 exclude:
   - tests
   - README.md
+  - content

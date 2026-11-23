@@ -8,7 +8,8 @@ if (!chromium) { console.error('playwright not found: run npm install in tests/'
 
 const ROOT = path.resolve(__dirname, '..');
 const ORIGIN = 'https://www.apollogrouptv.ca';
-const ROUTES = ['/', '/about-us/', '/faq/', '/contact/', '/privacy-policy/', '/refund-policy/', '/terms-and-conditions/', '/thank-you/'];
+const GUIDES = ['/guides/'].concat(JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'guides.json'), 'utf8')).map(g => '/guides/' + g.slug + '/'));
+const ROUTES = ['/', '/about-us/', '/faq/', '/contact/', '/privacy-policy/', '/refund-policy/', '/terms-and-conditions/', '/thank-you/'].concat(GUIDES);
 const NOINDEX = new Set(['/thank-you/']);
 // Statements that must not come back unless they become true (see commit history).
 const FORBIDDEN = [/credit card/i, /verified checkout/i, /256-bit/i, /bank-level/i, /\bofficial\b/i];
@@ -20,7 +21,7 @@ function serve() {
       let p = decodeURIComponent(q.url.split('?')[0]);
       if (p.endsWith('/')) p += 'index.html';
       const f = path.join(ROOT, p);
-      if (/^\/(tests\/|README\.md|_config\.yml)/.test(p) || !f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) {
+      if (/^\/(tests\/|content\/|README\.md|_config\.yml)/.test(p) || !f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) {
         r.writeHead(404, { 'content-type': 'text/html' }); return r.end(fs.readFileSync(path.join(ROOT, '404.html')));
       }
       r.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'application/octet-stream' }); r.end(fs.readFileSync(f));
@@ -45,12 +46,12 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
   check('robots.txt does not block the site', !/^Disallow:\s*\/\s*$/m.test(robots.text.split(/User-agent:\s*\*/i)[1] || ''));
   const sm = await get(base + '/sitemap.xml');
   const locs = [...sm.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-  check('sitemap.xml returns 200 with URLs', sm.status === 200 && locs.length >= 7, `${sm.status} ${locs.length}`);
+  check('sitemap.xml returns 200 with URLs', sm.status === 200 && locs.length >= 7 + GUIDES.length, `${sm.status} ${locs.length}`);
   check('sitemap lists only indexable canonical URLs', locs.every(l => l.startsWith(ORIGIN + '/') && !NOINDEX.has(l.replace(ORIGIN, ''))), locs.join(','));
   for (const l of locs) { const r = await get(l.replace(ORIGIN, base)); check(`sitemap URL resolves: ${l.replace(ORIGIN, '')}`, r.status === 200, String(r.status)); }
   const llms = await get(base + '/llms.txt');
   check('llms.txt returns 200', llms.status === 200 && llms.text.startsWith('# '), String(llms.status));
-  for (const dev of ['/tests/regression.js', '/tests/package.json', '/README.md', '/_config.yml']) { const x = await get(base + dev); check(`development file is not published: ${dev}`, x.status === 404, String(x.status)); }
+  for (const dev of ['/tests/regression.js', '/tests/package.json', '/content/build-guides.js', '/content/guides/what-is-iptv.md', '/README.md', '/_config.yml']) { const x = await get(base + dev); check(`development file is not published: ${dev}`, x.status === 404, String(x.status)); }
   const nf = await get(base + '/this-page-does-not-exist/');
   check('unknown URL returns 404', nf.status === 404, String(nf.status));
 
@@ -72,9 +73,10 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
     let ldOk = blocks.length === 1, types = [];
     try { types = JSON.parse(blocks[0])['@graph'].map(n => n['@type']); } catch (e) { ldOk = false; }
     check(`${r} JSON-LD parses and has Organization + WebSite`, ldOk && types.includes('Organization') && types.includes('WebSite'), types.join(','));
-    if (!NOINDEX.has(r)) check(`${r} main heading is in the HTML without JavaScript`, /<h1[\s>]/.test(text.split('<div id="root">')[1] || ''));
+    if (!NOINDEX.has(r)) check(`${r} main heading is in the HTML without JavaScript`, /<h1[\s>]/.test(text.split('<div id="root">')[1] || text.split('<body>')[1] || ''));
     for (const f of FORBIDDEN) check(`${r} raw HTML has no "${f.source}" claim`, !f.test(text.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ')));
   }
+  for (const gdr of GUIDES.slice(1)) { const x = await get(base + gdr); const types = (() => { try { return JSON.parse(x.text.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].map(n => n['@type']); } catch (e) { return []; } })(); check(`${gdr} has Article, FAQPage and BreadcrumbList data`, ['Article', 'FAQPage', 'BreadcrumbList'].every(k => types.includes(k)), types.join(',')); check(`${gdr} loads no JavaScript bundle`, !/<script[^>]+src=/.test(x.text)); }
   check('all titles are unique', titles.size === ROUTES.length, String(titles.size));
   check('all descriptions are unique', descs.size === ROUTES.length, String(descs.size));
 
@@ -113,7 +115,7 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
       if (r === '/') {
         check(`${tag} payment section states the real method`, /How Payment Works/.test(d.text) && /Interac e-Transfer/.test(d.text));
         check(`${tag} four plans with prices are shown`, ['24.99', '51.99', '89.99', '159.99'].every(p => d.text.includes(p)));
-        check(`${tag} footer links to all main pages`, ['/about-us/', '/faq/', '/contact/', '/privacy-policy/', '/refund-policy/', '/terms-and-conditions/'].every(h => d.links.includes(h)), d.links.join(','));
+        check(`${tag} footer links to all main pages`, ['/about-us/', '/guides/', '/faq/', '/contact/', '/privacy-policy/', '/refund-policy/', '/terms-and-conditions/'].every(h => d.links.includes(h)), d.links.join(','));
         if (vname === 'mobile') {
           const btn = page.locator('button[aria-label="Open menu"]');
           check(`${tag} menu button is labelled`, await btn.count() === 1);
