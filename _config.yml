@@ -1,0 +1,5 @@
+# GitHub Pages build settings.
+# The site is plain static HTML; this file only keeps development files out of the published site.
+exclude:
+  - tests
+  - README.md

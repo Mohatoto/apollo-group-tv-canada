@@ -12,7 +12,7 @@ const ROUTES = ['/', '/about-us/', '/faq/', '/contact/', '/privacy-policy/', '/r
 const NOINDEX = new Set(['/thank-you/']);
 // Statements that must not come back unless they become true (see commit history).
 const FORBIDDEN = [/credit card/i, /verified checkout/i, /256-bit/i, /bank-level/i, /\bofficial\b/i];
-const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain', '.json': 'application/json' };
+const MIME = { '.woff2': 'font/woff2',  '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain', '.json': 'application/json' };
 
 function serve() {
   return new Promise(res => {
@@ -20,7 +20,7 @@ function serve() {
       let p = decodeURIComponent(q.url.split('?')[0]);
       if (p.endsWith('/')) p += 'index.html';
       const f = path.join(ROOT, p);
-      if (!f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) {
+      if (/^\/(tests\/|README\.md|_config\.yml)/.test(p) || !f.startsWith(ROOT) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) {
         r.writeHead(404, { 'content-type': 'text/html' }); return r.end(fs.readFileSync(path.join(ROOT, '404.html')));
       }
       r.writeHead(200, { 'content-type': MIME[path.extname(f)] || 'application/octet-stream' }); r.end(fs.readFileSync(f));
@@ -50,6 +50,7 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
   for (const l of locs) { const r = await get(l.replace(ORIGIN, base)); check(`sitemap URL resolves: ${l.replace(ORIGIN, '')}`, r.status === 200, String(r.status)); }
   const llms = await get(base + '/llms.txt');
   check('llms.txt returns 200', llms.status === 200 && llms.text.startsWith('# '), String(llms.status));
+  for (const dev of ['/tests/regression.js', '/tests/package.json', '/README.md', '/_config.yml']) { const x = await get(base + dev); check(`development file is not published: ${dev}`, x.status === 404, String(x.status)); }
   const nf = await get(base + '/this-page-does-not-exist/');
   check('unknown URL returns 404', nf.status === 404, String(nf.status));
 
@@ -82,7 +83,8 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
   for (const [vname, opts] of Object.entries(VIEWS)) {
     const ctx = await browser.newContext(opts);
     for (const r of ROUTES) {
-      const page = await ctx.newPage(); const errors = [], bad = [];
+      const page = await ctx.newPage(); const errors = [], bad = [], thirdParty = [];
+      page.on('request', q => { const h = new URL(q.url()).host; if (/fonts\.(googleapis|gstatic)\.com/.test(h)) thirdParty.push(h); });
       page.on('pageerror', e => errors.push(String(e).slice(0, 160)));
       page.on('console', m => { if (m.type() === 'error' && !/fonts\.g|Failed to load resource/.test(m.text())) errors.push(m.text().slice(0, 160)); });
       page.on('response', x => { if (x.status() >= 400 && x.url().startsWith(base)) bad.push(x.status() + ' ' + x.url().replace(base, '')); });
@@ -100,6 +102,7 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
       const tag = `[${vname}] ${r}`;
       check(`${tag} no JavaScript errors`, errors.length === 0, errors.join(' | '));
       check(`${tag} no failed requests`, bad.length === 0, bad.join(' | '));
+      check(`${tag} fonts are served from the site itself`, thirdParty.length === 0, thirdParty.join(','));
       check(`${tag} no broken images`, d.broken.length === 0, d.broken.join(','));
       check(`${tag} every image has alt text`, d.noAlt === 0, String(d.noAlt));
       check(`${tag} no horizontal overflow`, d.overflow <= 1, d.overflow + 'px');
@@ -124,6 +127,16 @@ function check(name, ok, detail = '') { results.push({ name, ok }); if (!ok) fai
       }
       await page.close();
     }
+    await ctx.close();
+  }
+  // --- layout stability: web fonts arriving late must not move the page
+  for (const [vname, vp] of [['desktop', { width: 1350, height: 940 }], ['laptop', { width: 1920, height: 1080 }], ['tablet', { width: 820, height: 1180 }], ['mobile', { width: 412, height: 823 }], ['small', { width: 360, height: 740 }]]) {
+    const ctx = await browser.newContext({ viewport: vp }); const page = await ctx.newPage();
+    await page.route(/\.woff2(\?|$)/, async r => { await new Promise(z => setTimeout(z, 600)); r.continue(); });
+    await page.addInitScript(() => { window.__cls = 0; new PerformanceObserver(l => { for (const e of l.getEntries()) if (!e.hadRecentInput) window.__cls += e.value; }).observe({ type: 'layout-shift', buffered: true }); });
+    await page.goto(base + '/', { waitUntil: 'load' }); await page.waitForTimeout(2400);
+    const cls = await page.evaluate(() => window.__cls);
+    check(`[${vname}] layout shift with late fonts is under 0.1`, cls < 0.1, cls.toFixed(4));
     await ctx.close();
   }
   await browser.close(); if (server) server.close();
