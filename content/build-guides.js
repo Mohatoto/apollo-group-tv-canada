@@ -9,8 +9,8 @@ const ORDER = ['what-is-iptv', 'choosing-a-plan', 'ordering-and-interac-payment'
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const ld = o => '<script type="application/ld+json">' + JSON.stringify(o).replace(/</g, '\\u003c') + '</script>';
 const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-const fontHead = home.match(/ {4}<link rel="preload" as="font"[\s\S]*?<\/style>\n/)[0];
-const cssHref = home.match(/<link rel="stylesheet" crossorigin href="([^"]+)">/)[1];
+const fontHead = '    ' + home.match(/<style>@font-face[\s\S]*?<\/style>\n/)[0].replace(/@media \(max-width:640px\)\{#home[^}]*\}\}/, '');
+const cssHref = '/assets/index-v4.css';
 const org = { '@type': 'Organization', '@id': O + '#organization', name: 'Apollo Group TV Canada', url: O, logo: { '@type': 'ImageObject', url: O + 'logo-512.png', width: 512, height: 512 } };
 const site = { '@type': 'WebSite', '@id': O + '#website', url: O, name: 'Apollo Group TV Canada', inLanguage: 'en-CA', publisher: { '@id': O + '#organization' } };
 const STYLE = `<style>
