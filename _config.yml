@@ -4,3 +4,4 @@ exclude:
   - tests
   - README.md
   - content
+  - AGENTS.md

@@ -1,0 +1,10 @@
+{
+ "": {"title":"Apollo Group TV Canada | IPTV Live TV, Sports & Movies","desc":"Apollo Group TV Canada is an IPTV streaming service with live TV, sports, movies and series in HD and 4K on up to 5 devices. Plans start at $24.99 for 30 days.","name":"Home"},
+ "about-us/": {"title":"About Apollo Group TV Canada | IPTV Streaming Service","desc":"Who Apollo Group TV Canada is, what the service includes and how it works: live TV, sports, movies and on-demand content with no long-term contracts.","name":"About"},
+ "faq/": {"title":"Apollo Group TV Canada FAQ | Devices, Plans & Payment","desc":"Answers to common questions about Apollo Group TV Canada: supported devices, number of screens, internet speed, plans, payment by Interac e-Transfer and setup.","name":"FAQ"},
+ "contact/": {"title":"Contact Apollo Group TV Canada | Support","desc":"Contact Apollo Group TV Canada for subscription questions, setup help or technical support. The support team typically responds within 24 hours.","name":"Contact"},
+ "privacy-policy/": {"title":"Privacy Policy | Apollo Group TV Canada","desc":"How Apollo Group TV Canada collects, uses, shares and protects your information, and how cookies are used on this website.","name":"Privacy Policy"},
+ "refund-policy/": {"title":"Refund Policy | Apollo Group TV Canada","desc":"Apollo Group TV Canada refund policy: eligibility, how to request a refund, non-refundable items, subscription cancellation and technical issues.","name":"Refund Policy"},
+ "terms-and-conditions/": {"title":"Terms and Conditions | Apollo Group TV Canada","desc":"Terms and conditions for using Apollo Group TV Canada: accounts, acceptable use, payment terms, service availability and limitation of liability.","name":"Terms and Conditions"},
+ "thank-you/": {"title":"Order Summary | Apollo Group TV Canada","desc":"Order summary and payment instructions for your Apollo Group TV Canada subscription.","name":"Order Summary","noindex":true}
+}
