@@ -40,3 +40,16 @@ All regression checks must pass before pushing.
 The site only answers visitors from Canada and the US (verified crawlers are exempt), so a sandbox request is usually blocked. Verify through the Cloudflare request tracer (`POST /accounts/{account}/request-tracer/trace` with `context.geoloc.iso_code: "CA"`) and Google Search Console. Purge the Cloudflare cache after each deploy.
 
 Search Console: account `apollogrouptvca@gmail.com` (`/u/6/` in the owner's Chrome), property `sc-domain:apollogrouptv.ca`.
+
+## Google Analytics 4 (installed 2026-11-23)
+
+- Property `apollogrouptv.ca`, Measurement ID `G-QBG708E9DH`, GA account 291373829, Google account taoifikagouieze122@gmail.com (the one used for the owner's Search Console; this site's Search Console is on apollogrouptvca@gmail.com, GA4 is not).
+- Where it lives: an inline snippet before `</head>` in every published HTML page, and the `GA` constant in `content/build-guides.js` and `content/pages/build-pages.js` so rebuilt pages keep it. It is inline on purpose: guides must not load a script file (regression suite).
+- Conversions to read: page views of `/thank-you/` (one view = one order form sent). No custom events; do not touch the order links or the thank-you page.
+- Every weekly SEO/GEO run and every quality-control run reads GA4 right after the Search Console step, in the owner's browser at https://analytics.google.com (read-only: never change settings, users, data streams, retention or links). Compare the last 28 days with the previous 28 (data starts 2026-11-23; until 28 days exist, compare what exists and say so):
+  - Reports > Acquisition > Traffic acquisition: sessions by channel, Organic Search sessions, and AI-assistant referrals (session source containing chatgpt, perplexity, gemini, copilot, claude).
+  - Reports > Engagement > Landing page: sessions, engagement rate and key events per landing page.
+  - Reports > Engagement > Events: counts of the conversion events above.
+- Use it together with Search Console: a page with Search Console clicks but low engagement or no conversions gets its intent match, first screen and call to action fixed (cro, first-screen-check) before more traffic is pushed to it; landing pages that convert well get priority for ranking and internal-link work; pages that receive AI-assistant referrals get priority for ai-seo and citation-gap work.
+- Report: add to seo/reports/ and to the owner summary: sessions, organic sessions, AI-assistant sessions and conversions against the previous period, the 5 best and 5 worst landing pages by conversion, and what was changed because of it.
+- Rules: never send personal data to GA (names, emails, phone numbers, addresses, anything typed into a form); keep one Google tag only; keep the privacy/cookie text that names Google Analytics accurate when tracking changes; do not add Cloudflare Web Analytics or another analytics script on top. If GA4 cannot be reached, continue without it and say so in the report.
