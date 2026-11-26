@@ -54,7 +54,8 @@ const STYLE = `<style>
 </style>`;
 const NAV = [['/', 'Home'], ['/#pricing', 'Plans'], ['/guides/', 'Guides'], ['/faq/', 'FAQ'], ['/contact/', 'Contact']];
 const FOOT = [['/about-us/', 'About'], ['/guides/', 'Guides'], ['/faq/', 'FAQ'], ['/contact/', 'Contact'], ['/privacy-policy/', 'Privacy Policy'], ['/refund-policy/', 'Refund Policy'], ['/terms-and-conditions/', 'Terms & Conditions']];
-function page({ url, title, desc, type, graph, body }) {
+function page({ url, title, desc, type, graph, body, image }) {
+  const img = image || O + 'og-image.jpg';
   return `<!doctype html>
 <html lang="en-CA">
   <head>
@@ -72,13 +73,13 @@ function page({ url, title, desc, type, graph, body }) {
     <meta property="og:description" content="${esc(desc)}" />
     <meta property="og:type" content="${type}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:image" content="${O}og-image.jpg" />
+    <meta property="og:image" content="${img}" />
     <meta property="og:site_name" content="Apollo Group TV Canada" />
     <meta property="og:locale" content="en_CA" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(title)}" />
     <meta name="twitter:description" content="${esc(desc)}" />
-    <meta name="twitter:image" content="${O}og-image.jpg" />
+    <meta name="twitter:image" content="${img}" />
 ${fontHead}    <link rel="stylesheet" href="${cssHref}">
     ${STYLE}
     ${ld({ '@context': 'https://schema.org', '@graph': graph })}
@@ -95,7 +96,7 @@ ${fontHead}    <link rel="stylesheet" href="${cssHref}">
 const guides = ORDER.map(slug => {
   const raw = fs.readFileSync(path.join(SRC, slug + '.md'), 'utf8');
   const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/); const fm = Object.fromEntries(m[1].split('\n').map(l => [l.slice(0, l.indexOf(':')).trim(), l.slice(l.indexOf(':') + 1).trim()]));
-  return { slug, title: fm.title, desc: fm.description, published: fm.published || '2026-11-23', updated: fm.updated || UPDATED, md: m[2].trim() };
+  return { slug, title: fm.title, desc: fm.description, published: fm.published || '2026-11-23', updated: fm.updated || UPDATED, image: fm.image ? { url: O + fm.image, width: +fm.imageWidth, height: +fm.imageHeight } : null, md: m[2].trim() };
 });
 const nice = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 for (const g of guides) {
@@ -112,11 +113,11 @@ ${html}
 <div class="g-cta"><p><strong>Ready to try it?</strong> Plans start at $24.99 for 30 days, with no contract and use on up to 5 devices.</p><a class="g-btn" href="/#pricing">View plans and pricing</a></div>
 <h2>More guides</h2><ul class="g-list">${rel.map(o => `<li><a href="/guides/${o.slug}/">${esc(o.title)}</a><p>${esc(o.desc)}</p></li>`).join('')}</ul></article>`;
   const graph = [org, site,
-    { '@type': 'Article', '@id': url + '#article', headline: g.title, description: g.desc, datePublished: g.published, dateModified: g.updated, inLanguage: 'en-CA', image: O + 'og-image.jpg', author: { '@id': O + '#organization' }, publisher: { '@id': O + '#organization' }, mainEntityOfPage: url, isPartOf: { '@id': O + '#website' } },
+    { '@type': 'Article', '@id': url + '#article', headline: g.title, description: g.desc, datePublished: g.published, dateModified: g.updated, inLanguage: 'en-CA', image: g.image ? { '@type': 'ImageObject', url: g.image.url, width: g.image.width, height: g.image.height } : O + 'og-image.jpg', author: { '@id': O + '#organization' }, publisher: { '@id': O + '#organization' }, mainEntityOfPage: url, isPartOf: { '@id': O + '#website' } },
     { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: O }, { '@type': 'ListItem', position: 2, name: 'Guides', item: O + 'guides/' }, { '@type': 'ListItem', position: 3, name: g.title, item: url }] }];
   if (faqs.length) graph.push({ '@type': 'FAQPage', '@id': url + '#faq', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
   fs.mkdirSync(path.join(ROOT, 'guides', g.slug), { recursive: true });
-  fs.writeFileSync(path.join(ROOT, 'guides', g.slug, 'index.html'), page({ url, title: (g.title + ' | Apollo Group TV Canada').length <= 60 ? g.title + ' | Apollo Group TV Canada' : g.title, desc: g.desc, type: 'article', graph, body }));
+  fs.writeFileSync(path.join(ROOT, 'guides', g.slug, 'index.html'), page({ url, title: (g.title + ' | Apollo Group TV Canada').length <= 60 ? g.title + ' | Apollo Group TV Canada' : g.title, desc: g.desc, type: 'article', graph, body, image: g.image && g.image.url }));
   console.log(g.slug, '| title', (g.title + ' | Apollo Group TV Canada').length, '| desc', g.desc.length, '| faqs', faqs.length);
 }
 const iurl = O + 'guides/', ititle = 'Streaming Guides | Apollo Group TV Canada', idesc = 'Plain-language guides from Apollo Group TV Canada on IPTV, internet speed, buffering, data use, plans, devices and paying by Interac e-Transfer.';

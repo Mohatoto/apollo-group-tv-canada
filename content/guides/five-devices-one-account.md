@@ -26,6 +26,7 @@ Leave some room for everything else on your network, such as video calls, downlo
 
 - **Use a cable for the main TV.** An Ethernet cable frees up Wi-Fi for the phones and tablets.
 - **Put the router in the middle of the home.** Rooms far from the router get the weakest signal.
+- **Give the main TV priority when the house is busy.** Many routers have a QoS or device priority setting, and our guide to [router settings for streaming](/guides/router-settings-for-streaming/) shows where to find it.
 - **Watch in HD on small screens.** A phone or tablet shows little benefit from 4K and uses far less speed in HD.
 - **Keep your login details private.** Sharing them outside your household can leave you without a free device when you want to watch.
 

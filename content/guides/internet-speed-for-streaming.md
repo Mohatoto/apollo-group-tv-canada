@@ -34,7 +34,7 @@ The speed on your internet bill is the speed that reaches your modem. The speed 
 2. Run the test in the evening, when home networks are busiest.
 3. Compare the download number with the table above.
 
-If the result near the TV is much lower than the result next to the router, the problem is your Wi-Fi signal, not your internet plan.
+If the result near the TV is much lower than the result next to the router, the problem is your Wi-Fi signal, not your internet plan. Our guide to the [best router settings for streaming](/guides/router-settings-for-streaming/) covers the band, channel and QoS changes that help most.
 
 ## Frequently asked questions
 
