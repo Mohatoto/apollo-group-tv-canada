@@ -34,7 +34,7 @@ This guide explains each setting in plain language, shows where router makers pu
 | 2.4 GHz channel width | 20 MHz | Less interference with neighbours | Wireless, Advanced |
 | QoS or device priority | On, with the TV or streaming box set to high priority | The TV keeps its share when others download | Advanced, QoS |
 | Guest network | On, for visitors and smart-home gadgets | Keeps extra devices off your main network | Guest Network |
-| Security | WPA3, or WPA2/WPA3 mixed for older devices | Protects the network without slowing streams | Wireless Security |
+| Security | WPA3, or WPA2/3 if older devices cannot connect | Protects the network without slowing streams | Wireless Security |
 
 Menu names differ between brands and models. The examples below come from NETGEAR and TP-Link support articles; most other routers have the same settings under similar names.
 
@@ -59,7 +59,7 @@ Firmware is the router's own software. Updates fix faults that cause dropouts an
 
 **How to do it:**
 
-1. Open the router's app or its web page (the address is printed on the label, for example routerlogin.net on NETGEAR or tplinkwifi.net on TP-Link).
+1. Open the router's app or its web page (for example routerlogin.net on NETGEAR or tplinkwifi.net on TP-Link).
 2. Find the Firmware, Update or Administration section.
 3. Install any update, let the router restart, and turn on automatic updates if the option exists.
 
@@ -103,8 +103,10 @@ Channel width is how much of the band one network uses: 20, 40, 80 or 160 MHz. W
 | Band | Suggested width | Reason |
 |---|---|---|
 | 2.4 GHz | 20 MHz | Only three channels fit without overlap at 20 MHz; wider settings crowd neighbours and pick up more interference |
-| 5 GHz | Auto or 80 MHz; try 40 MHz if the signal is unsteady | Room for wide channels, but narrower is steadier in a crowded building |
-| 6 GHz | Auto | The band has room for wide channels (14 at 80 MHz) |
+| 5 GHz | Auto; try 40 MHz if the signal is unsteady | General guidance: room for wide channels, but a narrower one is often steadier in a crowded building |
+| 6 GHz | Auto | General guidance: NETGEAR says the band has room for 14 channels at 80 MHz |
+
+The 2.4 GHz row follows TP-Link's channel advice. The 5 GHz and 6 GHz rows are our general guidance, based on TP-Link's explanation that wider channels trade stability for speed; they are not a rule from any router maker, so test the result where you watch.
 
 A stream needs far less than a wide channel can carry: even 4K needs about 15 to 25 Mbps according to the figures above. So in an apartment building with many networks, a narrower and steadier channel often gives a better picture than a wider and faster one that keeps dropping.
 
@@ -124,7 +126,7 @@ NETGEAR notes that this lowers the priority of other traffic, so downloads may t
 
 **Tips that make QoS work:**
 
-- **Prioritise one to three devices, not everything.** T-Mobile's guide on device priority makes the same point: if every device is high priority, none is.
+- **Prioritise one to three devices, not everything.** T-Mobile's guide on device priority suggests one to three high-priority devices and says that prioritising everything defeats the purpose.
 - **Enter a bandwidth slightly below your measured speed** if the router asks for it. How-To Geek suggests 80 to 95% of the speed test result, so the router has room to manage traffic.
 - **Use timed priority** if your router offers it, for example the evening hours when you watch.
 - **Test with and without QoS.** If nothing changes, turn it off again; on a connection with plenty of spare speed it has nothing to manage.
@@ -139,7 +141,7 @@ Most routers offer it under a Guest Network or Guest Wi-Fi menu. Turn it on, giv
 
 Security settings do not cost streaming speed, so there is no reason to weaken them:
 
-- **Encryption:** use WPA3. If some older devices cannot connect, the NSA guidance suggests the WPA2/WPA3 mixed mode, and a Wi-Fi password of at least twenty characters.
+- **Encryption:** use WPA3. If some older devices cannot connect, the NSA guidance suggests choosing WPA2/3 instead, with a passphrase of at least twenty characters.
 - **Router login:** change the default admin password. NETGEAR's own article shows the factory login is admin and password on its routers, which is why it must be changed.
 - **Remote management and UPnP:** the NSA guidance recommends turning off remote administration and Universal Plug and Play. If an app or game stops working after you turn UPnP off, check your router maker's help pages for the specific port setting it needs instead.
 
@@ -147,7 +149,7 @@ Security settings do not cost streaming speed, so there is no reason to weaken t
 
 Some changes are popular in forums but seldom fix streaming:
 
-- **Changing DNS servers.** DNS turns names into addresses when a connection starts; it does not carry the video. Switching DNS can change how fast a page or app starts, but it does not raise the speed of a stream that is already playing.
+- **Changing DNS servers.** As Cloudflare's explanation of DNS puts it, DNS translates domain names into IP addresses, and that lookup happens before the device requests the content; the answer is often cached for a while. The video itself does not pass through DNS, so a different DNS server may change how quickly an app or page starts, but it is unlikely to fix a stream that pauses while it is already playing.
 - **Turning every setting to maximum.** The widest channel, the highest power and every "turbo" mode do not add up to a steadier picture, especially in a crowded building. Steady beats fast for live TV.
 - **Restarting the router every day.** An occasional restart clears faults, as our [buffering guide](/guides/fix-buffering/) explains, but a daily restart does not improve a healthy router.
 - **Basic Wi-Fi extenders.** They can help in a weak room, but a mesh system or a cable is usually more reliable.
@@ -203,7 +205,7 @@ Use 1, 6 or 11, whichever is least used by nearby networks. Intel and TP-Link bo
 
 ### Will changing my DNS stop buffering?
 
-Rarely. DNS only looks up addresses when a connection starts and does not carry the video, so it does not change the speed of a stream that is already playing. Check your Wi-Fi band, signal and QoS first.
+Rarely. DNS translates names into IP addresses before a connection starts, and the video itself does not pass through it, so changing DNS is unlikely to help a stream that pauses while it plays. Check your Wi-Fi band, signal and QoS first.
 
 ## Sources
 
@@ -219,4 +221,5 @@ All sources were opened on 26 November 2026.
 - NETGEAR Support: [What is Smart Connect and how to enable or disable it](https://kb.netgear.com/25346/What-is-Smart-Connect-and-how-do-I-enable-or-disable-it-on-my-Nighthawk-router) (updated 7 July 2025)
 - NETGEAR Support: [What is WiFi 6E?](https://kb.netgear.com/000062798/What-is-WiFi-6E) (updated 7 July 2025)
 - T-Mobile: [How to prioritize devices on Wi-Fi](https://www.t-mobile.com/home-internet/the-signal/internet-help/how-to-prioritize-devices-on-wifi) (November 2025)
-- How-To Geek: [How to use Quality of Service (QoS) on your router](https://www.howtogeek.com/75660/the-beginners-guide-to-qos-on-your-router)
+- How-To Geek: [How to use Quality of Service (QoS) on your router](https://www.howtogeek.com/75660/the-beginners-guide-to-qos-on-your-router) (March 2016)
+- Cloudflare Learning Center: [What is DNS?](https://www.cloudflare.com/learning/dns/)
