@@ -32,6 +32,8 @@ Many smart TVs and streaming boxes have an Ethernet port. Some streaming sticks 
 3. **Restart the router now and then.** It clears faults that build up over weeks.
 4. **Consider a mesh system** for a large home. It places extra access points so that far rooms get a strong signal.
 
+For the channel, channel width and QoS settings inside the router, see [the best router settings for streaming](/guides/router-settings-for-streaming/).
+
 ## If you cannot run a cable
 
 Powerline adapters send the network through your home's electrical wiring, and a mesh access point placed near the TV can provide an Ethernet port. Either one is usually steadier than a weak direct Wi-Fi signal.

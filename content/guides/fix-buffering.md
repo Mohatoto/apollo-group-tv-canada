@@ -25,6 +25,8 @@ Run a speed test on the device you watch on, or on a phone held next to it. Apol
 - Use the 5 GHz network if your router offers one and the device is in the same room or the next one.
 - Connect the TV or streaming box to the router with an Ethernet cable if you can. A cable removes Wi-Fi problems entirely.
 
+If the signal is good but the picture still pauses when others use the connection, the [router settings for streaming](/guides/router-settings-for-streaming/) guide covers channels, QoS and the order to change them.
+
 ## 5. Reduce what else is using the connection
 
 Pause large downloads, cloud backups and game updates while you watch. Check how many screens are streaming at the same moment, since they all share one connection.
