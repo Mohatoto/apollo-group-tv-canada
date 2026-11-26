@@ -5,7 +5,7 @@ let marked; for (const p of ['marked', path.join(process.env.NODE_GLOBAL_ROOT ||
 if (!marked) { console.error('marked not found: npm install marked'); process.exit(2); }
 const ROOT = path.resolve(__dirname, '..'), SRC = path.join(__dirname, 'guides'), O = 'https://www.apollogrouptv.ca/';
 const UPDATED = process.env.GUIDES_DATE || new Date().toISOString().slice(0, 10);
-const ORDER = ['what-is-iptv', 'choosing-a-plan', 'ordering-and-interac-payment', 'five-devices-one-account', 'internet-speed-for-streaming', 'wifi-vs-ethernet', 'fix-buffering', 'streaming-data-usage', 'streaming-while-travelling', 'cutting-cable-checklist'];
+const ORDER = ['what-is-iptv', 'choosing-a-plan', 'ordering-and-interac-payment', 'five-devices-one-account', 'internet-speed-for-streaming', 'wifi-vs-ethernet', 'router-settings-for-streaming', 'fix-buffering', 'streaming-data-usage', 'streaming-while-travelling', 'cutting-cable-checklist'];
 const esc = s => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 // Google Analytics 4 (inline, loads gtag.js after the page has loaded).
 const GA = '<script>(function(){var id="G-QBG708E9DH";window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",id);function l(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s)}if(document.readyState==="complete")setTimeout(l,0);else addEventListener("load",function(){setTimeout(l,0)})})()</script>';
@@ -95,7 +95,7 @@ ${fontHead}    <link rel="stylesheet" href="${cssHref}">
 const guides = ORDER.map(slug => {
   const raw = fs.readFileSync(path.join(SRC, slug + '.md'), 'utf8');
   const m = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/); const fm = Object.fromEntries(m[1].split('\n').map(l => [l.slice(0, l.indexOf(':')).trim(), l.slice(l.indexOf(':') + 1).trim()]));
-  return { slug, title: fm.title, desc: fm.description, md: m[2].trim() };
+  return { slug, title: fm.title, desc: fm.description, published: fm.published || '2026-11-23', updated: fm.updated || UPDATED, md: m[2].trim() };
 });
 const nice = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 for (const g of guides) {
@@ -107,12 +107,12 @@ for (const g of guides) {
   const faqs = [...faqBody.matchAll(/^### (.+)\n\n([\s\S]*?)(?=\n### |\s*$)/gm)].map(x => ({ q: x[1].trim(), a: x[2].trim().replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '') }));
   const related = guides.filter(o => o.slug !== g.slug); const start = ORDER.indexOf(g.slug); const rel = [1, 2, 3].map(k => guides[(start + k) % guides.length]);
   const body = `<p class="g-crumb"><a href="/">Home</a> › <a href="/guides/">Guides</a> › ${esc(g.title)}</p>
-<article><h1>${esc(g.title)}</h1><p class="g-meta">By Apollo Group TV Canada · Last updated <time datetime="${UPDATED}">${nice(UPDATED)}</time></p>
+<article><h1>${esc(g.title)}</h1><p class="g-meta">By Apollo Group TV Canada · Last updated <time datetime="${g.updated}">${nice(g.updated)}</time></p>
 ${html}
 <div class="g-cta"><p><strong>Ready to try it?</strong> Plans start at $24.99 for 30 days, with no contract and use on up to 5 devices.</p><a class="g-btn" href="/#pricing">View plans and pricing</a></div>
 <h2>More guides</h2><ul class="g-list">${rel.map(o => `<li><a href="/guides/${o.slug}/">${esc(o.title)}</a><p>${esc(o.desc)}</p></li>`).join('')}</ul></article>`;
   const graph = [org, site,
-    { '@type': 'Article', '@id': url + '#article', headline: g.title, description: g.desc, datePublished: '2026-11-23', dateModified: UPDATED, inLanguage: 'en-CA', image: O + 'og-image.jpg', author: { '@id': O + '#organization' }, publisher: { '@id': O + '#organization' }, mainEntityOfPage: url, isPartOf: { '@id': O + '#website' } },
+    { '@type': 'Article', '@id': url + '#article', headline: g.title, description: g.desc, datePublished: g.published, dateModified: g.updated, inLanguage: 'en-CA', image: O + 'og-image.jpg', author: { '@id': O + '#organization' }, publisher: { '@id': O + '#organization' }, mainEntityOfPage: url, isPartOf: { '@id': O + '#website' } },
     { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: O }, { '@type': 'ListItem', position: 2, name: 'Guides', item: O + 'guides/' }, { '@type': 'ListItem', position: 3, name: g.title, item: url }] }];
   if (faqs.length) graph.push({ '@type': 'FAQPage', '@id': url + '#faq', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
   fs.mkdirSync(path.join(ROOT, 'guides', g.slug), { recursive: true });
