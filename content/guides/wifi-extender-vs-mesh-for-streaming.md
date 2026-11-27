@@ -30,7 +30,7 @@ Choose a mesh system for a larger home, several floors or thick walls. Choose an
 | Best for | One weak room, an apartment or condo, a tight budget | A larger home, several floors, thick walls |
 | Speed at the TV | Can drop, because the repeating uses Wi-Fi; NETGEAR says a basic dual-band extender may reduce the available bandwidth by half | Held up better when the nodes have a dedicated link between them, such as a third band (How-To Geek) |
 | Network name | Often a second name; you switch by hand | One name for the whole home |
-| Cost | Lower | Higher |
+| Cost | Lower; NETGEAR says very basic extenders can be found for as little as $20 to $30 | Higher; Best Buy Canada says mesh systems "tend to cost more" |
 | Setup | Plug in, pair, choose a spot | Place and set up several units |
 
 Best Buy Canada says mixing a mesh system and an extender "typically doesn't mesh (pun intended) well". Neither one adds speed that is not arriving from your internet provider. Best Buy Canada notes that mesh "isn't going to speed up the internet beyond what your plan allows".
@@ -63,16 +63,16 @@ Three more things to know about extenders:
 
 <h2 id="mesh">How does a mesh system work?</h2>
 
-A mesh system uses several units, called nodes, placed around the home that act as one network. NETGEAR says mesh "uses multiple devices around your home to create one seamless network". One node usually connects to your router by Ethernet cable, and the others spread the signal through the home. Each node has the same network name, so the TV never has to switch.
+A mesh system uses several units, called nodes, placed around the home that act as one network. NETGEAR says mesh "uses multiple devices around your home to create one seamless network". NETGEAR says one node usually connects to your home router by Ethernet cable, and the others spread the signal through the home. Each node has the same network name, so the TV never has to switch.
 
 What keeps mesh steadier than a basic extender is how the nodes talk to each other, called the backhaul:
 
 | Mesh type | How the nodes link | Effect on streaming |
 |---|---|---|
-| Tri-band | One of the system's three bands is used for the link between nodes, and the other two serve your devices (How-To Geek) | The link does not compete with the TV for airtime |
+| Tri-band | One of the system's three bands is typically used for the link between nodes, and the other two serve your devices (How-To Geek) | The link does not compete with the TV for airtime |
 | Dual-band | The link shares bandwidth with your other devices (How-To Geek) | Performance is lower than tri-band |
 
-Not every mesh system is the same, and a cheap dual-band mesh set may not be much better than a good extender. Check the box or the maker's page for the words "tri-band" or "dedicated backhaul".
+Not every mesh system is the same. This is our own reasoning, not a quote from a source: a dual-band mesh set that shares its link with your devices may not be a big step up from a good extender. Check the box or the maker's page for the words "tri-band" or "dedicated backhaul".
 
 <h2 id="roaming">Does a TV benefit from mesh roaming?</h2>
 
@@ -90,7 +90,7 @@ Put the unit about halfway between the router and the weak area, where the signa
 - **Away from interference.** Keep it away from mirrors, large metal surfaces, microwaves, cordless phones, refrigerators and baby monitors.
 - **If the wireless link is unstable.** TP-Link suggests an Ethernet cable from the router to the extender, with the extender in access point mode.
 
-TP-Link's page is written for its own extenders (last updated 2 July 2021), but the same placement logic applies to mesh nodes. Mesh nodes can be moved easily; D-Link says they "can be relocated" and that coverage grows by adding nodes.
+TP-Link's page is written for its own extenders (last updated 2 July 2021), but the same placement logic applies to mesh nodes. Mesh nodes can be moved easily; D-Link says nodes "can be moved to different locations" and that you can "add more nodes to increase your Wi-Fi signal coverage".
 
 <h2 id="cable">Is a network cable better than either?</h2>
 
@@ -98,7 +98,7 @@ Yes, when you can run one. A cable does not depend on the signal and does not sh
 
 - **A cable to a mesh node near the TV.** One node connects to the router by cable, and a second node by the TV can give the TV a wired port.
 - **A cable to an extender in access point mode.** TP-Link describes this as the fallback when a wireless link is not stable.
-- **Powerline adapters.** They send the network through the home's electrical wiring; results depend on the wiring, so test the speed at the TV afterwards.
+- **Powerline adapters.** NETGEAR and D-Link list Powerline as a connection some extender models support. Our own advice, not from the sources: the result depends on the home's wiring, so test the speed at the TV afterwards.
 
 <h2 id="decide">How do you decide?</h2>
 
