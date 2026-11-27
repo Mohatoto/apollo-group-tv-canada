@@ -161,7 +161,7 @@ Changing DNS servers, turning every setting to maximum, restarting the router ev
 - **Changing DNS servers.** As Cloudflare's explanation of DNS puts it, DNS translates domain names into IP addresses, and that lookup happens before the device requests the content; the answer is often cached for a while. The video itself does not pass through DNS, so a different DNS server may change how quickly an app or page starts, but it is unlikely to fix a stream that pauses while it is already playing.
 - **Turning every setting to maximum.** The widest channel, the highest power and every "turbo" mode do not add up to a steadier picture, especially in a crowded building. Steady beats fast for live TV.
 - **Restarting the router every day.** An occasional restart clears faults, as our [buffering guide](/guides/fix-buffering/) explains, but a daily restart does not improve a healthy router.
-- **Basic Wi-Fi extenders.** They can help in a weak room, but a mesh system or a cable is usually more reliable.
+- **Basic Wi-Fi extenders.** They can help in a weak room, but a mesh system or a cable is usually more reliable. See [Wi-Fi extender or mesh for streaming](/guides/wifi-extender-vs-mesh-for-streaming/).
 
 <h2 id="isp-router">What if your router came from your internet provider?</h2>
 

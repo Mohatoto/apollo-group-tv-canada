@@ -50,4 +50,4 @@ For streaming, any cable marked Cat 5e or higher is more than enough.
 
 ### Will a Wi-Fi extender fix buffering?
 
-It can help in a room with a weak signal, but basic extenders also cut speed. A mesh system or a cable is a more reliable fix.
+It can help in a room with a weak signal, but basic extenders also cut speed. A mesh system or a cable is a more reliable fix; see [Wi-Fi extender or mesh for streaming](/guides/wifi-extender-vs-mesh-for-streaming/).
